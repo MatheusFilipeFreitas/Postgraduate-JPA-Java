@@ -1,9 +1,11 @@
 package com.mathffreitas.jpaunipds.config;
 
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.media.ArraySchema;
 import io.swagger.v3.oas.models.media.StringSchema;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springdoc.core.customizers.OperationCustomizer;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +24,11 @@ public class OpenApiConfig {
                         .title("JPA UNIPDS API")
                         .description("Conference management REST API with OpenAPI documentation and HATEOAS links")
                         .version("v1.0.0"))
+                .components(new Components().addSecuritySchemes("bearerAuth", new SecurityScheme()
+                        .type(SecurityScheme.Type.HTTP)
+                        .scheme("bearer")
+                        .bearerFormat("JWT")
+                        .description("Paste only the JWT returned by /auth/login")))
                 .addServersItem(new Server().url(serverUrl));
     }
 

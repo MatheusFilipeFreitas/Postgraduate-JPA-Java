@@ -6,6 +6,8 @@ import com.mathffreitas.jpaunipds.repository.user.UserRepository;
 import com.mathffreitas.jpaunipds.service.common.AbstractBaseService;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl extends AbstractBaseService<User> implements UserService {
 
@@ -21,6 +23,14 @@ public class UserServiceImpl extends AbstractBaseService<User> implements UserSe
     }
 
     @Override
+    public User create(User user) {
+        if (existsByEmail(user.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("Email already exists!");
+        }
+        return userRepository.save(user);
+    }
+
+    @Override
     protected String getEntityName() {
         return "User";
     }
@@ -29,5 +39,10 @@ public class UserServiceImpl extends AbstractBaseService<User> implements UserSe
     protected void updateEntity(User existing, User incoming) {
         existing.setName(incoming.getName());
         existing.setEmail(incoming.getEmail());
+    }
+
+    @Override
+    public Optional<User> existsByEmail(String email) {
+        return userRepository.findUsersByEmail(email);
     }
 }
