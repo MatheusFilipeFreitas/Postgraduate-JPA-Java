@@ -1,10 +1,10 @@
-package com.mathffreitas.jpaunipds.models;
+package com.mathffreitas.jpaunipds.model.entity.conference;
 
+import com.mathffreitas.jpaunipds.model.entity.common.BaseEntity;
+import com.mathffreitas.jpaunipds.model.entity.session.Session;
+import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -16,15 +16,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "tbl_conference")
+@AttributeOverride(name = "id", column = @Column(name = "id_conference"))
 @Getter
 @Setter
 @NoArgsConstructor
-public class Conference {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_conference")
-    private Long id;
+public class Conference extends BaseEntity {
 
     @Column(name = "name")
     private String name;

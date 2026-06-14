@@ -1,6 +1,9 @@
-package com.mathffreitas.jpaunipds.models;
+package com.mathffreitas.jpaunipds.model.entity.subscription;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Subscription {
 
-    @Id
+    @EmbeddedId
     private SubscriptionId id;
 
     @Column(name = "created_at")

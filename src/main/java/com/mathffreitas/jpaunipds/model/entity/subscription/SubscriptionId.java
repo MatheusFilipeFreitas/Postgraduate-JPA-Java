@@ -1,6 +1,10 @@
-package com.mathffreitas.jpaunipds.models;
+package com.mathffreitas.jpaunipds.model.entity.subscription;
 
-import jakarta.persistence.*;
+import com.mathffreitas.jpaunipds.model.entity.session.Session;
+import com.mathffreitas.jpaunipds.model.entity.user.User;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,7 +18,9 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class SubscriptionId implements Serializable {
+
     @ManyToOne
     @JoinColumn(name = "subscribed_user_id")
     private User user;
